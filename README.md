@@ -44,6 +44,17 @@ Optional system tools:
 | `/usr/share/dict/{british-,american-}english` | spelling vocabulary for the repair rules |
 | a serif font (Libertinus Serif, EB Garamond, …) | the print PDF |
 
+If you have `make`, `make help` lists the entry points used below: `venv`, `health`,
+`test`, `check` (what CI runs), `lint`, `fixture`, `book`, `review`, `clean`, `dist`.
+
+```bash
+make venv                                   # .venv + editable install
+make health                                 # what works here, what is missing
+make book PDF=inbox/mybook.pdf SLUG=mybook \
+        TITLE="Title of the Book" AUTHOR="An Author"   # add + all + status
+make review SLUG=mybook                     # status, audit trail, unknown words
+```
+
 ## Quickstart
 
 ```bash

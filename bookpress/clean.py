@@ -299,12 +299,18 @@ def clean(book) -> dict:
         if c.quote_sub:
             fh.write(f"closing quote rendered as {c.quote_sub!r} in this scan\n")
         fh.write("\n")
-        for rule in ("word", "quote", "footnote", "marker"):
-            fh.write(f"--- {rule} ---\n")
-            for ch in c.changes:
-                if ch["rule"] == rule:
-                    fh.write(f"p{ch['page']:>4} ch{str(ch['chapter']):>3} "
-                             f"{ch['before'][:60]!r} -> {ch['after'][:60]!r}\n")
+        # every rule that fired, canonical order first, then the rest by frequency
+        order = ([r for r in ("word", "quote", "footnote", "marker", "para") if r in by_rule]
+                 + [r for r in by_rule if r not in ("word", "quote", "footnote", "marker",
+                                                    "para")])
+        for rule in order:
+            items = [ch for ch in c.changes if ch["rule"] == rule]
+            fh.write(f"--- {rule} ({len(items)}) ---\n")
+            for ch in items[:200]:
+                fh.write(f"p{ch['page']:>4} ch{str(ch['chapter']):>3} "
+                         f"{ch['before'][:60]!r} -> {ch['after'][:60]!r}\n")
+            if len(items) > 200:
+                fh.write(f"... {len(items) - 200} more (see {book.changes_tsv.name})\n")
             fh.write("\n")
     print(f"{book.slug}: {len(c.changes)} changes {dict(by_rule)}")
     return book_json

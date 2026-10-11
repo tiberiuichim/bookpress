@@ -33,6 +33,15 @@ extract -> structure -> dropcaps -> fixes -> clean -> cover -> render
 ## Working loop for a new book
 
 ```bash
+make health                    # first: what tools are actually usable here
+make book PDF=inbox/scan.pdf SLUG=mybook TITLE="…" AUTHOR="…"
+make review SLUG=mybook        # status + audit trail + unresolved words
+```
+
+The `Makefile` wraps the common sequences; `make help` lists them. Underneath it is
+plain CLI usage:
+
+```bash
 bookpress healthcheck            # first: what tools are actually usable here
 bookpress add --pdf inbox/scan.pdf --slug mybook --title "…" --author "…"
 bookpress all mybook
@@ -79,6 +88,7 @@ Typical fixes, in order of payoff:
 ## Verifying your work
 
 ```bash
+make check                      # lint + health + selftest (what CI runs)
 python tests/selftest.py        # synthetic scan -> full pipeline -> assertions
 ```
 
