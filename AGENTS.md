@@ -33,6 +33,7 @@ extract -> structure -> dropcaps -> fixes -> clean -> cover -> render
 ## Working loop for a new book
 
 ```bash
+bookpress healthcheck            # first: what tools are actually usable here
 bookpress add --pdf inbox/scan.pdf --slug mybook --title "…" --author "…"
 bookpress all mybook
 bookpress status mybook          # chapters / footnotes / dropped pages / unresolved caps
@@ -80,6 +81,9 @@ Typical fixes, in order of payoff:
 ```bash
 python tests/selftest.py        # synthetic scan -> full pipeline -> assertions
 ```
+
+It also runs `bookpress healthcheck` and asserts the required dependencies resolve,
+so a broken environment fails the test rather than silently skipping stages.
 
 Add an assertion there whenever you fix a rule, so the fix stays fixed. The
 fixture lives in `tests/make_fixture.py`; it deliberately reproduces the nasty

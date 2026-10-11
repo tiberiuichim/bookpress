@@ -155,8 +155,9 @@ def ocr(book) -> list[dict]:
         book.dropcap_ocr.write_text("[]", encoding="utf-8")
         return []
     if not tesseract_available():
-        print(f"{book.slug}: tesseract not installed - skipping OCR of "
-              f"{len(unresolved)} drop caps (use overrides/dropcaps.json)")
+        print(f"{book.slug}: tesseract not found - skipping OCR of "
+              f"{len(unresolved)} drop caps (fix by hand in overrides/dropcaps.json; "
+              "see: bookpress healthcheck)")
         book.dropcap_ocr.write_text("[]", encoding="utf-8")
         return []
 

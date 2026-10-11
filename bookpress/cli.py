@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 from . import __version__, clean as clean_stage, cover as cover_stage
+from . import doctor as doctor_stage
 from . import dropcaps as dropcaps_stage, extract as extract_stage
 from . import render as render_stage, structure as structure_stage
 from .config import Book, ConfigError, add_book, get_book, load
@@ -127,10 +128,14 @@ def cmd_bootstrap(args, root: Path) -> int:
     venv = root / ".venv"
     subprocess.run([sys.executable, "-m", "venv", str(venv)], check=True)
     subprocess.run([str(venv / "bin", "pip"), "install", "-e", "."], check=True)
-    print(f"\nvenv ready: {venv}\n"
-          "external tools still needed: pandoc (EPUB), tesseract (drop-cap OCR), "
-          "and a system word list such as /usr/share/dict/words (spelling rules).")
+    print("\nvenv ready: " + str(venv))
+    print("now check what is usable:  .venv/bin/bookpress healthcheck")
     return 0
+
+
+def cmd_healthcheck(args, root: Path) -> int:
+    code, _ = doctor_stage.report(root, as_json=args.json)
+    return code
 
 
 # ---------------------------------------------------------------- parser
@@ -180,6 +185,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("bootstrap", help="create .venv and install bookpress into it") \
         .set_defaults(func=cmd_bootstrap)
+
+    s = sub.add_parser("healthcheck",
+                       help="report which tools/libraries are usable on this machine")
+    s.add_argument("--json", action="store_true")
+    s.set_defaults(func=cmd_healthcheck)
     return p
 
 

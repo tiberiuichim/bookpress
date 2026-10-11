@@ -167,7 +167,8 @@ def to_markdown(book, book_json) -> int:
 
 def build_epub(book) -> Path | None:
     if subprocess.run(["which", "pandoc"], capture_output=True).returncode:
-        print(f"{book.slug}: pandoc not installed - skipping EPUB")
+        print(f"{book.slug}: pandoc not found - skipping EPUB "
+              "(see: bookpress healthcheck)")
         return None
     out = book.epub_dir / f"{book.title}.epub"
     cover = book.epub_dir / "cover.jpg"
@@ -246,8 +247,8 @@ def to_typst(book, book_json) -> str:
 
 def build_pdf(book) -> Path | None:
     if not importlib.util.find_spec("typst"):
-        print(f"{book.slug}: the typst python bindings are missing - "
-              "run `bookpress bootstrap` or install into the interpreter you use")
+        print(f"{book.slug}: the typst python bindings are missing in this "
+              "interpreter - use the venv python, or see bookpress healthcheck")
         return None
     import typst
     out = book.pdf_dir / f"{book.title}.pdf"

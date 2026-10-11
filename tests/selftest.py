@@ -38,6 +38,18 @@ def run(argv, cwd):
     assert r.returncode == 0, f"bookpress {' '.join(argv)} exited {r.returncode}"
 
 
+def health(root: Path) -> int:
+    from bookpress import doctor
+    code, rows = doctor.report(root, as_json=True)
+    by_name = {r["name"]: r["status"] for r in rows}
+    print("--- healthcheck ---")
+    check(code == 0, "healthcheck exits clean")
+    for name in ("python", "PyMuPDF", "pillow", "numpy"):
+        check(by_name[name] == doctor.OK, f"required dependency present: {name}")
+    check(by_name["fonts"] == doctor.OK, "print font resolvable by Typst")
+    return 0
+
+
 def main() -> int:
     tmp = Path(tempfile.mkdtemp(prefix="bookpress-selftest-"))
     pdf = build_fixture(tmp / "inbox" / "fixture.pdf")
@@ -105,6 +117,8 @@ def main() -> int:
         produced = list((work / name).glob(f"*.{name}"))
         if produced:
             check(bool(produced), f"{name.upper()} built: {produced[0].name}")
+
+    health(tmp)
 
     print("\n" + ("ALL CHECKS PASSED" if not FAILURES else f"{len(FAILURES)} FAILURES"))
     for f in FAILURES:

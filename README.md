@@ -24,7 +24,18 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e .
 ```
 
-`pip install -e .` also gives you the `bookpress` command. Optional system tools:
+`pip install -e .` also gives you the `bookpress` command. Check your machine with:
+
+```bash
+bookpress healthcheck
+```
+
+It lists the python libraries, external tools and fonts, and says what each missing
+piece costs you (no pandoc means no EPUB; no tesseract means drop caps have to be
+fixed by hand). It exits non-zero only when something *required* is missing. The font
+row asks Typst itself whether a family resolves, so fonts bundled with Typst count.
+
+Optional system tools:
 
 | tool | needed for |
 |---|---|
