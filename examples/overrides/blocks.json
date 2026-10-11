@@ -1,0 +1,6 @@
+[
+ {"page": 63,
+  "merge_first": 4,
+  "expect": "substring that must appear in the merged text",
+  "new": "The whole paragraph, rewritten from the page image because the scan's OCR mangled it beyond repair."}
+]

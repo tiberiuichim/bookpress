@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bookpress"
+version = "0.1.0"
+description = "Turn a scanned + OCR'd book PDF into a clean EPUB and a typeset print PDF."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "PyMuPDF>=1.23",
+    "pillow>=10",
+    "numpy>=1.24",
+    "typst>=0.13",
+]
+
+[project.scripts]
+bookpress = "bookpress.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["bookpress*"]
+
+[tool.setuptools.package-data]
+bookpress = ["data/*.txt"]

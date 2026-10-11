@@ -1,0 +1,15 @@
+# Per-book work area: geometry, intermediate JSON, audit trails, built books.
+books/
+# Where you drop the scans you want to convert.
+inbox/
+# Your own book definitions and per-book overrides.
+books.toml
+books/*/overrides/
+
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+dist/
+build/
+*.egg-info/

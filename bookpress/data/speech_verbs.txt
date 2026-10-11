@@ -1,0 +1,11 @@
+# Speech verbs used to find a dialogue tag at the end of a paragraph
+# ("'Nothing at all, lamented X." -> "'Nothing at all,' lamented X.").
+# Extend this for other languages.
+said asks asked replied replies remarked muttered exclaimed adds added continued
+whispered announced suggests suggested laments lamented promises promised
+objects objected confirms confirmed repeats repeated insists insisted orders
+ordered commands commanded observes observed notes noted comments commented
+declares declared states stated responds responded questions questioned
+demands demanded answers answered calls called cries cried protests protested
+warns warned explains explained admits admitted agrees agreed laughs laughed
+concludes concluded interrupts interrupted echoes echoed assures assured urges urged

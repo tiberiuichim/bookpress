@@ -1,0 +1,21 @@
+name: selftest
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: external tools (EPUB, drop-cap OCR, spelling vocabulary)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc tesseract-ocr wamerican
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e .
+      - run: python tests/selftest.py

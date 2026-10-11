@@ -1,0 +1,3 @@
+# Month names used to recognise "Place, 1 January 1785" datelines.
+# Matching is fuzzy (edit distance <= 2), so OCR slips like "Fanuary" still hit.
+january february march april may june july august september october november december

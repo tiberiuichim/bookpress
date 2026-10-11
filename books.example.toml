@@ -1,0 +1,29 @@
+# Copy to books.toml and edit.  `bookpress add` writes entries here for you.
+#
+# Every book is a [book.<slug>] section.  Only `pdf` and `title` are required.
+
+[book.example]
+pdf = "inbox/example-scan.pdf"      # path is relative to the repo root
+title = "Title of the Book"
+author = "Name of the Author"
+series = ""                         # optional, shown on the title page
+lang = "en"                         # Typst/pandoc language tag (hyphenation)
+page = "a5"                         # a5 | a4 | a6 | 5x8 | 6x9 | 12x16cm | ...
+pt = 11                             # body font size
+font = "Libertinus Serif"
+cover_page = 1                      # which scanned page becomes the EPUB cover
+
+# --- optional tuning (all have sensible defaults / auto-detection) ---------
+#
+# Patterns that start a footnote block in the bottom band of a page.
+# footnote_start = ['^[*†]\\s*\\S', '^[A-Za-z]{0,3}[.,]?\\s?\\d{2,4}\\b']
+#
+# Heading patterns that open a new chapter (case-insensitive).
+# heading = '^(CHAPTER|EPILOGUE|PROLOGUE|PART|BOOK|INTRODUCTION)\s*[\d.IVX]*\s*$'
+#
+# A scan whose OCR renders the closing quote as some other character:
+# force that character here instead of relying on auto-detection.
+# quote_substitute = "5"
+#
+# Characters the scan misreads as an opening quote before a capital letter.
+# open_quote_chars = ["£"]

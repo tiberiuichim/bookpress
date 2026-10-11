@@ -1,0 +1,4 @@
+[
+ {"find": "furthcr", "replace": "further"},
+ {"find": "the Revalution", "replace": "the Revolution"}
+]

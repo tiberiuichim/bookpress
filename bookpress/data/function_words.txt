@@ -1,0 +1,9 @@
+# Function words that may be the first half of a glued OCR token ("ofThoth").
+a an the of in and to his her their its own all was were be been not no nor but or
+so if as than then too very will would can could shall should has have had did does
+done for on at by with from that this these those who whom whose which what when
+where why how it he she they we you i me him us them my our your some any each
+every both either neither one two three up down over under again ever never always
+well also into onto upon off away back still yet just only even more most much many
+few little here there now about after before between during through against above
+below once while until since per via
